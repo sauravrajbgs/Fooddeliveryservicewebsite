@@ -4,8 +4,17 @@ import {assets} from '../../assets/frontend_assets/assets'
 import {Link, useNavigate}from 'react-router-dom'
 import { StoreContext } from '../../context/storeContext'
 
-function Navbar({setshowLogin, setSearch}) {
-  const[menu ,serMenu]=useState("home")
+
+
+function Navbar({setshowLogin,  setSearchTerm }) {
+  const {food_list}=useContext(StoreContext);
+  const[menu ,serMenu]=useState("home");
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value); // Update searchTerm in parent
+  };
+  
+
+ 
   const {getTotalCartAmount ,token ,setToken}=useContext(StoreContext);
   const navigate=useNavigate();
   const logout=()=>{
@@ -15,6 +24,15 @@ navigate();
 
 
   }
+  // console.log(prev);
+  // const data1= food_list.filter((item) => {
+  //   if (prev === "") {
+  //     return food_list;
+  //    } else if (item.name.toLowerCase().includes(prev.toLowerCase())) {
+  //     return item;
+  //   }
+  //  });
+  
   return (
  <navbar className='navbar'>
  <Link to= '/'><img src={assets.logo}alt='' className='logo'/></Link>
@@ -25,7 +43,15 @@ navigate();
   <a href='#app-download'  onClick={()=>serMenu('mobile-app')}className={menu=="mobile-app"?"active":""}>mobile-app</a>
  </ul>
  <div className='navbar-right'>
-  <img onClick={setSearch} src={assets.search_icon} alt=''className=''/>
+<div className='searchproduct'>
+<input 
+          type="text " className='texts'
+          placeholder="Type your favorite food "
+          onChange={handleSearchChange} // Call handler on input change
+        />
+</div>
+ 
+ 
   <div className='navbar-search-icon'>
    <Link to='/cart'><img src={assets.basket_icon}alt=''/></Link> 
     <div className={getTotalCartAmount()===0?"":"dot"}></div>
@@ -38,9 +64,11 @@ navigate();
   <hr/>
   <li onClick={logout}><img src={assets.logout_icon}alt=''/><p>Logout</p></li>
 </ul>
+
   </div>}
  
  </div>
+
  </navbar>
   )
 }

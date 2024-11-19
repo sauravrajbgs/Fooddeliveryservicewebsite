@@ -48,7 +48,8 @@ if(response.data.sucess){
   window.location.replace(   session_url);
 }
 else{
-  alert('error')
+  alert('error');
+ 
  
 }
     }
@@ -56,10 +57,10 @@ const navigate =useNavigate();
 
   useEffect(()=>{
 if(! token){
-navigate('/cart')
+navigate(' /cart')
 }
 else if(getTotalCartAmount()===0){
-  navigate('/cart')
+  navigate(' /cart')
 }
   },[token])
   

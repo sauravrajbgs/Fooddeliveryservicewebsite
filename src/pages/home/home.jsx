@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import './home.css';
 import Header from '../../components/Header/Header';
 import ExploreMenu from '../../components/ExploreMenu/ExploreMenu';
-import FoodDisplay from '../../components/FoodDisplay/FoodDisplay';
+ import FoodDisplay from '../../components/FoodDisplay/FoodDisplay';
 import AppDownload from '../../components/AppDownload/appDownload';
 
-function Home() {
+function Home({searchTerm} ) {
   const[category , setCategory]=useState("All")
   return (
     <>
       <Header/>
       <ExploreMenu category={category} setCategory={setCategory}/>
-      <FoodDisplay  category={category}/>
+       <FoodDisplay  category={category} searchTerm={searchTerm} /> 
       <AppDownload/>
     </>
   

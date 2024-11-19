@@ -20,6 +20,7 @@ function Cart() {
        <hr/>
 
        {food_list.map((item ,index)=>{
+        <div> key={item.name}</div>
 if(cartItem[item._id]>0){
   return(
     
@@ -80,4 +81,4 @@ if(cartItem[item._id]>0){
   )
 }
 
-export default Cart
+export default Cart;

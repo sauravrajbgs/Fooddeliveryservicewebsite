@@ -140,3 +140,26 @@ list-style: none;
 .navbar-right img{
     cursor: pointer;
 }
+
+    
+
+.searchproduct input{
+   width:fit-content;
+    height:30px ;
+    border-radius: 1.5rem;
+  border: 1 px solid tomato;
+    align-items: center;
+    border: transparent;
+    color: tomato;
+
+
+}
+.texts{
+    text-align: center;
+  
+    
+}
+.searchproduct input:hover{
+    border: 1px solid tomato;
+
+}

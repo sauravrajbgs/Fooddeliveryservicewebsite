@@ -56,6 +56,8 @@ if(localStorage.getItem("token")){
 }
 loadData();
 },[])
+
+
     const contextValue={
 food_list,
 cartItem,
@@ -66,6 +68,7 @@ getTotalCartAmount,
 url,
 token,
 setToken,
+
 
 
     }
