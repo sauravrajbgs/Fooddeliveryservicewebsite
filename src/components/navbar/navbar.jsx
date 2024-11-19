@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './navbar.css'
 import {assets} from '../../assets/frontend_assets/assets'
-import {Link}from 'react-router-dom'
+import {Link, useNavigate}from 'react-router-dom'
+import { StoreContext } from '../../context/storeContext'
 
-function Navbar() {
+function Navbar({setshowLogin, setSearch}) {
   const[menu ,serMenu]=useState("home")
+  const {getTotalCartAmount ,token ,setToken}=useContext(StoreContext);
+  const navigate=useNavigate();
+  const logout=()=>{
+localStorage.removeItem("token");
+setToken("");
+navigate();
+
+
+  }
   return (
  <navbar className='navbar'>
- <img src={assets.logo}alt='' className='logo'/>
+ <Link to= '/'><img src={assets.logo}alt='' className='logo'/></Link>
  <ul className='navbar-menu'>
   <Link to='/'  onClick={()=>serMenu('home')} className={menu=="home"?"active":""}>home</Link>
   <a href='#exploreMenu' onClick={()=>serMenu('menu')} className={menu=="menu"?"active":""}>menu</a>
@@ -15,12 +25,21 @@ function Navbar() {
   <a href='#app-download'  onClick={()=>serMenu('mobile-app')}className={menu=="mobile-app"?"active":""}>mobile-app</a>
  </ul>
  <div className='navbar-right'>
-  <img src={assets.search_icon} alt=''className=''/>
+  <img onClick={setSearch} src={assets.search_icon} alt=''className=''/>
   <div className='navbar-search-icon'>
-    <img src={assets.basket_icon}alt=''/>
-    <div className='dot'></div>
+   <Link to='/cart'><img src={assets.basket_icon}alt=''/></Link> 
+    <div className={getTotalCartAmount()===0?"":"dot"}></div>
   </div>
-  <button>sign in</button>
+  {! token?<button onClick={()=>setshowLogin(true)}>sign in</button>:
+  <div className='navbar-profile'>
+<img src={assets.profile_icon}alt=''/>
+<ul className='nav-profile-dropdown'>
+  <li onClick={()=>navigate('/myorder')}><img src={assets.bag_icon}alt=''/><p>Order</p></li>
+  <hr/>
+  <li onClick={logout}><img src={assets.logout_icon}alt=''/><p>Logout</p></li>
+</ul>
+  </div>}
+ 
  </div>
  </navbar>
   )
